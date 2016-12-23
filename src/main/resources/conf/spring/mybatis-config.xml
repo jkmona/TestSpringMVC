@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="true" />
+		<setting name="lazyLoadingEnabled" value="true" />
+		<setting name="multipleResultSetsEnabled" value="true" />
+	</settings>
+	<typeAliases>
+		<!-- 需要在实体类添加@Alias("别名") -->
+		<!--<typeAlias alias="Product" type="com.bluemobi.ssm.model.Product"/>-->
+		<package name="cn.test.domain"/> 
+	</typeAliases>
+	<!-- 
+	<plugins>
+		<plugin interceptor="com.mybatisstore.log.LogPlugin">
+			<property name="" value=""/>
+		</plugin>
+	</plugins>
+	-->
+	<mappers>
+		<!-- <mapper class="com.mybatisstore.mapper.ProductMapper"/> -->
+		<package name="cn.test.dao"/>
+	</mappers>
+</configuration>

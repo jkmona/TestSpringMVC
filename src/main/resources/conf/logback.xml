@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true" scan="true">
+  <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+    <!-- encoders are assigned the type
+         ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+  
+  <appender name="rollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>D:/temp/logFile.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <!-- daily rollover -->
+      <fileNamePattern>logFile.%d{yyyy-MM-dd}.log</fileNamePattern>
+      <!-- keep 30 days' worth of history -->
+      <maxHistory>30</maxHistory>
+    </rollingPolicy>
+    <encoder>
+      <pattern>%d [%thread] %-5level %logger{35} - %msg%n</pattern>
+    </encoder>
+  </appender> 
+  
+  <appender name="email" class="ch.qos.logback.classic.net.SMTPAppender">
+    <smtpHost>221.192.235.26</smtpHost>
+   	<username>gnecp@gwm.cn</username>
+    <password>ecp@123.com</password>
+    <from>gnecp@gwm.cn</from>
+    <to>gnitdev@gwm.cn</to>
+    <subject>test error log of logback messages</subject>
+    <cyclicBufferTracker class="ch.qos.logback.core.spi.CyclicBufferTracker">
+      <!-- send just one log entry per email -->
+      <bufferSize>1</bufferSize>
+    </cyclicBufferTracker>
+    <layout class="ch.qos.logback.classic.PatternLayout">
+       <pattern>%d %level %thread %10logger %file %line %msg</pattern>
+    </layout>
+    <!-- 
+    <layout class="ch.qos.logback.classic.patternlayout">
+      <pattern>%-d{yyyy-mm-dd hh:mm:ss} [ %t:%r ] ['%x{application}'] %m %n</pattern>
+    </layout> -->
+  </appender>
+  <logger name="com.ibatis">
+    <level value="debug" />
+  </logger>
+  <logger name="java.sql.Connection">
+    <level value="debug" />
+  </logger>
+  <logger name="java.sql.PreparedStatement">
+    <level value="debug" />
+  </logger>
+  <!-- 3rdparty Loggers -->
+  <logger name="org.springframework.core">
+    <level value="INFO" />
+  </logger>
+  
+  <logger name="org.springframework.beans">
+    <level value="INFO" />
+  </logger>
+  
+  <logger name="org.springframework.context">
+    <level value="INFO" />
+  </logger>
+
+  <logger name="org.springframework.http">
+    <level value="INFO" />
+  </logger>
+
+  <logger name="org.springframework.web">
+    <level value="INFO" />
+  </logger>
+  <root level="INFO">
+    <appender-ref ref="stdout"/>
+    <appender-ref ref="email"/>
+    <appender-ref ref="rollingFile"/>
+  </root>
+</configuration>

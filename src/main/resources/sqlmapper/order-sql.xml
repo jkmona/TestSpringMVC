@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.test.dao.OrderDAO">
+	<resultMap type="Order" id="ordermap">
+		<id column="orderID" property="orderID" />
+		<result column="orderNumber" property="orderNumber" />
+	</resultMap>
+
+	<select id="getAllOrder" resultMap="ordermap">
+		select * from CustomerOrder
+	</select>
+	<insert id="insertOrder" parameterType="Order" keyProperty="orderID">
+		insert into CustomerOrder (orderID, orderNumber)
+		values (#{orderID}, #{orderNumber})
+	</insert>
+
+</mapper>
